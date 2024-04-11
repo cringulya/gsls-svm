@@ -199,5 +199,98 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Результаты}
+	\begin{itemize}
+		\item Во всех эксперементах использовалось Гауссовское ядро
+		      $\mathcal{K}(x, x^\prime) = exp(- \frac{|x - x^\prime|}{2 \sigma^2})$
+		\item Восстанавливалсь функция $sinc(x),\; l = 200$
+		\item Регрессия восстанавливалась для количества опорных векторов $n = 3,\;
+			      6,\; 7$ по точным данным, и данным с шумом
+		\item Шум добавлялся нормальным распределенимем $N(0, 0.1)$
+		\item Зависимость СКО от количества опорных векторов проводилась для $n = 1,
+			      ..., 12$
+		      \begin{itemize}
+			      \item $\sigma = 0.7, \; \gamma = 10^5$
+		      \end{itemize}
+
+
+	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Результаты. Графики (1)}
+	\begin{figure}
+		\centering
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../model3.png}
+			\caption{3 опорных вектора}
+		\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../model6.png}
+			\caption{6 опорных вектора}
+		\end{subfigure} \\
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../model7.png}
+			\caption{7 опорных вектора}
+		\end{subfigure}
+		\caption{Регрессия без шума}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Результаты. Графики (2)}
+	\begin{figure}
+		\centering
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../model_noise3.png}
+			\caption{3 опорных вектора}
+		\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../model_noise6.png}
+			\caption{6 опорных вектора}
+		\end{subfigure} \\
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../model_noise7.png}
+			\caption{7 опорных вектора}
+		\end{subfigure}
+		\caption{Регрессия c шумом}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Результаты. Графики (3)}
+	\begin{figure}
+		\centering
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../RMSE.png}
+			\caption{Без шумов}
+		\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+			\includegraphics[width=\linewidth]{../RMSE_noise.png}
+			\caption{С шумом}
+		\end{subfigure}
+		\caption{Графики зависимости ошибки от количества опорных векторов}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Выводы}
+	\begin{itemize}
+		\item Из графиков видно, что 7 - оптимальное количество опорных векторов для
+		      этих данных, так как без шума модель идентична $sinc(x)$, также по
+		      графикам зависимости СКО от количества опорных векторов видно, что после 7
+		      ошибка особо не уменьшается.
+		\item На графике зависимости ошибки от количества опорных векторов на
+		      данных с шумом, можно заметить, что после 10 ошибка немного начинает
+		      возрастать. Это можно связать с тем, что минимизация целевой функции
+		      происходит жадно, то есть, мы не всегда получаем истинный минимум.
+
+		\item В общем и целом, алгоритм показал себя хорошо, взамен
+		      на небольшую ошибку в точности из-за жадности, мы получаем большой прирост
+		      в производительности.
+
+	\end{itemize}
+
+\end{frame}
+
 \end{document}
