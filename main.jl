@@ -1,8 +1,9 @@
+include("./GSLS-SVM.jl")
 using Distributions, Random, Plots
 using .MySVM
 
 add_noise = true
-add_model_plot = true
+add_model_plot = false
 add_RMSE_plot = true
 max_sv_num = 12
 models_sv_num = [3, 6, 7]
@@ -36,8 +37,8 @@ function main()
             y1 = sinc.(x)
             f = get_SVR_model(kernel_RBF(σ), 𝜷, b, dict_indices)
             y2 = f.(x)
-            plot(x, y1, label="theoretical", color="gray", dpi=300)
-            plot!(x, y2, label="empirical", color="black")
+            plot(x, y1, label="theoretical", color="yellow", dpi=300)
+            plot!(x, y2, label="empirical", color="green")
             scatter!(X, transpose(𝒚),
                                     markersize=2,
                                     markerstrokewidth=0.5,
@@ -47,7 +48,11 @@ function main()
                                     markersize=3,
                                     label="support vectors",
                                     color="red")
-            savefig("model$sv_num")
+            if add_noise
+              savefig("model_noise$sv_num")
+            else
+              savefig("model$sv_num")
+            end
         end
     end
 
@@ -67,7 +72,11 @@ function main()
                                 xticks=1:max_sv_num,
                                 xlabel="sv_num",
                                 ylabel="RMSE")
-        savefig("RMSE.png")
+        if add_noise
+          savefig("RMSE_noise.png")
+        else
+          savefig("RMSE.png")
+        end
     end
 end
 
